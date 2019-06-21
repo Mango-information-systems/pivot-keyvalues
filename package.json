@@ -1,0 +1,17 @@
+{
+  "name": "pivot-keyval",
+  "version": "0.0.1",
+  "description": "pivot JSON key / value array properties to actual objects",
+  "main": "build/pivot-keyval.js",
+  "jsnext:main": "index",
+  "scripts": {
+    "pretest": "rm -rf build && mkdir build && rollup -f umd -n pivot-keyval -o build/pivot-keyval.js -- index.js",
+    "test": "tape 'test/**/*-test.js'"
+  },
+  "author": "Mehdi El Fadil - Mango Information Systems SPRL",
+  "license": "MIT",
+  "devDependencies": {
+    "rollup": "^1.15.6",
+    "tape": "^4.10.2"
+  }
+}
