@@ -1,27 +1,26 @@
-# pivot-keyval
+# pivot-keyvalues
 
 pivot JSON key / value array properties to actual objects.
 
-Example: `{name: 'location', val: 'https://example.com'}` → `{location: 'https://example.com'}`
+Example: `{name: 'location', value: 'https://example.com'}` → `{location: 'https://example.com'}`
 
 ## Setup
 
-    npm install pivot-keyval
+    npm install pivot-keyvalues
 
 ## Usage
 
 
 ### `nestedPath` option
 
-This option allows to pivot an array deeply nested inside an object. Use dots as separator
-
+This option allows to pivot an array deeply nested inside an object. Use dots notation.
 
 
 Example: 
 
 ````javascript
 
-const pivot = require('pivot-keyval')
+const pivot = require('pivot-keyvalues')
 
 let data = {
 	headers: [
