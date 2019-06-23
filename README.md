@@ -1,4 +1,4 @@
-# pivot-keyvalues
+# pivot-keyvalues [![Build Status](https://travis-ci.org/Mango-information-systems/pivot-keyvalues.svg?branch=0.0.1-wip)](https://travis-ci.org/Mango-information-systems/pivot-keyvalues)
 
 pivot JSON key / value array properties to actual objects.
 
