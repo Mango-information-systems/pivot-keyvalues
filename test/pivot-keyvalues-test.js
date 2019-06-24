@@ -2,99 +2,132 @@ const tape = require("tape")
 	, pivot = require("../")
 
 tape("pivot() should work with implicit key / value labels", function(test) {
-	let dataset =[[
+	
+	test.plan(1)
+	
+	let dataset = [
 		{
-			name: 'one'
-			, value: 1
+			name: 'website'
+			, value: 'https://d3js.org/'
 		}
 		, {
-			name: 'two'
-			, value: 'whatever'
+			name: 'visitors'
+			, value: 10000
 		}
-	]]
+	]
 	
-	test.deepEqual(pivot(dataset), [
-		{
-			'one': 1
-			, 'two': 'whatever'
-				
-		}
-	])
+	test.deepEqual(pivot(dataset), {
+		website: 'https://d3js.org/'
+		, visitors: 10000
+	})
 	
 	test.end()
 })
 
 tape("pivot() should work on deeply nested properties via nestedPath option", function(test) {
-	let dataset =[
+	
+	test.plan(1)
+	
+	let dataset =
 		{
-			payload: {
-				body: 'whatever'
-				, headers: [
+			analytics: {
+				details: 'something'
+				, summary: [
 					{
-						name: 'one'
-						, value: 1
+						name: 'website'
+						, value: 'https://d3js.org/'
 					}
 					, {
-						name: 'two'
-						, value: 'whatever'
+						name: 'visitors'
+						, value: 10000
 					}
 				]
 			}
 		}
-	]
 	
-	test.deepEqual(pivot(dataset, { nestedPath: 'payload.headers' }), [
-		{
-			'one': 1
-			, 'two': 'whatever'
-				
-		}
-	])
+	test.deepEqual(pivot(dataset, { nestedPath: 'analytics.summary' }), {
+		website: 'https://d3js.org/'
+		, visitors: 10000
+	})
+		
 	test.end()
 })
 
 tape("pivot() should support optional keyName and valueName parameters", function(test) {
-	let dataset =[[
+	
+	test.plan(1)
+	
+	let dataset =[
 		{
-			title: 'one'
-			, measure: 1
+			title: 'website'
+			, data: 'https://d3js.org/'
 		}
 		, {
-			title: 'two'
-			, measure: 'whatever'
+			title: 'visitors'
+			, data: 10000
 		}
-	]]
+	]
 	
-	test.deepEqual(pivot(dataset, { keyName: 'title', valueName: 'measure' }), [
-		{
-			'one': 1
-			, 'two': 'whatever'
-		}
-	])
+	test.deepEqual(pivot(dataset, { keyName: 'title', valueName: 'data' }), {
+		website: 'https://d3js.org/'
+		, visitors: 10000
+	})
 	
 	test.end()
 })
 
 tape("pivot() should ignore extra properties", function(test) {
-	let dataset =[[
+	
+	test.plan(1)
+	
+	let dataset = [
 		{
-			name: 'one'
-			, value: 1
-			, comment: 'something'
+			name: 'website'
+			, value: 'https://d3js.org/'
+			, comment: 'bookmarked'
 		}
 		, {
-			name: 'two'
-			, value: 'whatever'
+			name: 'visitors'
+			, value: 10000
+			, description: 'daily average'
 		}
-	]]
+	]
 	
-	test.deepEqual(pivot(dataset), [
+	test.deepEqual(pivot(dataset), {
+		website: 'https://d3js.org/'
+		, visitors: 10000
+	})
+	
+	test.end()
+})
+
+tape("pivot() should throw when structure to pivot is not an array", function(test) {
+	
+	test.plan(4)
+		
+	test.throws(() => pivot(), /Invalid datatype/)
+	test.throws(() => pivot(''), /Invalid datatype/)
+	test.throws(() => pivot({}), /Invalid datatype/)
+	
+	
+	let dataset =
 		{
-			'one': 1
-			, 'two': 'whatever'
-				
+			analytics: {
+				details: 'something'
+				, summary: [
+					{
+						name: 'website'
+						, value: 'https://d3js.org/'
+					}
+					, {
+						name: 'visitors'
+						, value: 10000
+					}
+				]
+			}
 		}
-	])
+		
+	test.throws(() => pivot(dataset, { nestedPath: 'analytics.details' }), /Invalid datatype/)
 	
 	test.end()
 })
