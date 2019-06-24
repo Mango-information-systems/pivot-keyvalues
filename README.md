@@ -1,18 +1,17 @@
 # pivot-keyvalues [![Build Status](https://travis-ci.org/Mango-information-systems/pivot-keyvalues.svg?branch=master)](https://travis-ci.org/Mango-information-systems/pivot-keyvalues)
 
-pivot JSON key / value array properties to actual objects.
+pivot an array of keys and value entries into actual objects.
 
-Example: `{name: 'location', value: 'https://example.com'}` → `{location: 'https://example.com'}`
+Example: `[{name: 'url', value: 'https://d3js.org'}]` → `{url: 'https://d3js.org'}`
 
 ## Why
 
 Converting arrays of keys / values into objects has the following benefits:
 
-* values can be looked up by key, instead of having to iterate through an array.
+* values can be looked up by key, instead of having to iterate through the array (likely multiple times).
 * the data structure is more compact.
 
 ![Why-pivot](/docs/why-pivot-keyvalues.png?raw=true)
-
 
 ## Setup
 
@@ -20,52 +19,83 @@ Converting arrays of keys / values into objects has the following benefits:
 
 ## Usage
 
+### pivot(data, options <small>nullable</small>) → {object}
 
-### `nestedPath` option
+#### Parameters
 
-This option allows to pivot an array deeply nested inside an object. Use dots notation.
+* `data` object containing an array of data to be pivoted - either at root level, or nested.
+* `options` object (optional):
+  * `keyName` string - default to 'name'
+  * `valueName` string - default to 'value'
+  * `nestedPath` string - level at which the reverse pivot is expected to be done. Use dots notation.
 
 
-Example: 
+#### Return
+
+Original object with transformed data structure: array is transformed into an object
+
+#### Examples
+
+
+##### specifying the labels of input properties with `keyName` and `valueName`
+
 
 ````javascript
 
 const pivot = require('pivot-keyvalues')
 
-let data = {
-	headers: [
-		{
-			name: 'location'
-			, value: 'https://example.com'
-		}
-		, {
-			name: 'content-type'
-			, value: 'text/html; charset=UTF-8'
-		}
-		, {
-			name: 'date'
-			, value: 'Fri, 1 Jan 2018 10:00:00 GMT'
-		}
-	]
-	, body: {
-		// [...]
+let dataset =[
+	{
+		title: 'website'
+		, data: 'https://d3js.org/'
 	}
-	
-}
+	, {
+		title: 'visitors'
+		, data: 10000
+	}
+]
 
+pivot(dataset, { keyName: 'title', valueName: 'data' })
 
-pivot(data, { nestedPath: 'headers' })
-
-// returns
+// Returns
+//
 // {
-// 	headers: {
-//		location: 'https://example.com'
-// 	    , 'content-type': 'text/html; charset=UTF-8'
-// 	    , date: 'Fri, 1 Jan 2018 10:00:00 GMT'
-// 	}
-// 	, body: {
-// 		// [...]
-// 	}
+// 	website: 'https://d3js.org/'
+// 	, visitors: 10000
 // }
+
+````
+
+##### pivoting at a deep nested level with `nestedPath`
+
+In the example below, the dataset to pivot is nested under `analytics.summary` property structure.
+
+````javascript
+
+let dataset =
+	{
+		analytics: {
+			details: 'something'
+			, summary: [
+				{
+					name: 'website'
+					, value: 'http://stackoverflow.com/'
+				}
+				, {
+					name: 'visitors'
+					, value: 10000
+				}
+			]
+		}
+	}
+
+pivot(dataset, { nestedPath: 'analytics.summary' })
+
+// Returns
+//
+// {
+// 	website: 'http://stackoverflow.com/'
+// 	, visitors: 10000
+// })
 
 ````
