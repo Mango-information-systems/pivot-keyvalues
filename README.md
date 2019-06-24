@@ -1,8 +1,18 @@
-# pivot-keyvalues [![Build Status](https://travis-ci.org/Mango-information-systems/pivot-keyvalues.svg?branch=0.0.1-wip)](https://travis-ci.org/Mango-information-systems/pivot-keyvalues)
+# pivot-keyvalues [![Build Status](https://travis-ci.org/Mango-information-systems/pivot-keyvalues.svg?branch=master)](https://travis-ci.org/Mango-information-systems/pivot-keyvalues)
 
 pivot JSON key / value array properties to actual objects.
 
 Example: `{name: 'location', value: 'https://example.com'}` → `{location: 'https://example.com'}`
+
+## Why
+
+Converting arrays of keys / values into objects has the following benefits:
+
+* values can be looked up by key, instead of having to iterate through an array.
+* the data structure is more compact.
+
+![Why-pivot](/docs/why-pivot-keyvalues.png?raw=true)
+
 
 ## Setup
 
