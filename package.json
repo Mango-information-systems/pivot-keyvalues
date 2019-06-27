@@ -1,6 +1,6 @@
 {
   "name": "pivot-keyvalues",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "pivot JSON key / value array properties to actual objects",
   "main": "build/pivot-keyvalues.js",
   "jsnext:main": "index",
