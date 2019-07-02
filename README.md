@@ -19,7 +19,7 @@ Converting arrays of keys / values into objects has the following benefits:
 
 ## Usage
 
-### pivot(data, options <small>nullable</small>) → {object}
+### `pivot(data, options <small>nullable</small>)` → `{object}`
 
 #### Parameters
 
