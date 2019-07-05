@@ -6,7 +6,7 @@
   "jsnext:main": "index",
   "scripts": {
     "pretest": "rm -rf build && mkdir build && rollup -f umd -n pivot-keyvalues -o build/pivot-keyvalues.js -- index.js",
-    "test": "tape 'test/**/*-test.js' | tap-spec"
+    "test": "tape 'test/**/*-test.js' | tap-summary"
   },
   "author": "Mehdi El Fadil - Mango Information Systems SPRL",
   "homepage": "https://github.com/Mango-information-systems/pivot-keyvalues",
@@ -20,7 +20,8 @@
   "license": "MIT",
   "devDependencies": {
     "rollup": "^1.15.6",
-    "tap-spec": "^5.0.0",
+    "tap-summary": "^4.0.0",
     "tape": "^4.10.2"
-  }
+  },
+  "dependencies": {}
 }
