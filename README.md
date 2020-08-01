@@ -88,3 +88,7 @@ pivot(dataset, { keyName: 'title', valueName: 'data' })
 // }
 
 ````
+
+## Development
+
+New releases are published on npm whenever a new tag is pushed on github (via travis-ci).
