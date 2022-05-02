@@ -1,4 +1,4 @@
-# pivot-keyvalues [![Build Status](https://travis-ci.org/Mango-information-systems/pivot-keyvalues.svg?branch=master)](https://travis-ci.org/Mango-information-systems/pivot-keyvalues)
+# pivot-keyvalues [![Build Status](https://travis-ci.com/Mango-information-systems/pivot-keyvalues.svg?branch=master)](https://travis-ci.org/Mango-information-systems/pivot-keyvalues)
 
 pivot an array of keys and value entries into actual objects.
 
