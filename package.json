@@ -1,6 +1,6 @@
 {
   "name": "pivot-keyvalues",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "pivot JSON key / value array properties to actual objects",
   "main": "build/pivot-keyvalues.js",
   "jsnext:main": "index",
@@ -20,7 +20,7 @@
   "license": "MIT",
   "devDependencies": {
     "rollup": "^1.32.1",
-    "tap-spec": "^5.0.0",
+    "tap-spec": "^2.2.2",
     "tape": "^4.13.2"
   }
 }
